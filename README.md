@@ -8,6 +8,6 @@ TBD
 
 ## License
 
-Copyright © 2018 Hexagram30
+Copyright © 2018, Hexagram30
 
 Apache License, Version 2.0
