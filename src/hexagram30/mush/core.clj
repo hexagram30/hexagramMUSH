@@ -1,4 +1,4 @@
-(ns hexagram-mush.core)
+(ns hexagram30.mush.core)
 
 (defn foo
   "I don't do a whole lot."
