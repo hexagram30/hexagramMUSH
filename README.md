@@ -2,12 +2,28 @@
 
 *A JVM (Clojure) MUSH Platform, built on a graph database*
 
+[![][logo]][logo-large]
+
+
+#### Contents
+
+* [Dependencies](#dependencies-)
+* [Installation](#installation-)
+* [Startup](#startup-)
+* [Usage](#usage-)
+   * [Registration Mode](#registration-mode-)
+   * [Player Mode](#player-mode-)
+   * [Builder Mode](#builder-mode-)
+   * [Multi-Realm Mode](#multi-realm-mode-)
+* [Background](#background-)
+* [License](#license-)
+
 This project is in pause while the subprojects upon which it depends are
 being constructed. To see the progress on those, visit the
 [hexagram30 Github org](https://github.com/hexagram30).
 
 
-## Dependencies
+## Dependencies [&#x219F;](#contents)
 
 | [![][clojure-logo]][clojure] | [![][orientdb-logo]][orientdb] | [![][7bridges-logo]][clj-odbp] |
 |:----------------------------:|:------------------------------:|:------------------------------:|
@@ -20,40 +36,40 @@ For a production deployment, you will most likely not want to run an
 embedded OrientDB, but rather one as its own service.
 
 
-## Installation
+## Installation [&#x219F;](#contents)
 
 TBD
 
 
-## Startup
+## Startup [&#x219F;](#contents)
 
 TBD
 
 
-## Usage
+## Usage [&#x219F;](#contents)
 
 
-### Registration Mode
-
-TBD
-
-
-### Player Mode
+### Registration Mode [&#x219F;](#contents)
 
 TBD
 
 
-### Builder Mode
+### Player Mode [&#x219F;](#contents)
 
 TBD
 
 
-### Multi-Realm Mode
+### Builder Mode [&#x219F;](#contents)
 
 TBD
 
 
-## Background
+### Multi-Realm Mode [&#x219F;](#contents)
+
+TBD
+
+
+## Background [&#x219F;](#contents)
 
 This project has been many, many years in the making, almost since my first
 playing of a text adventure game on a CP\M machine in 1981. Over the years,
@@ -84,7 +100,7 @@ Hey, there's a pattern! **8** (compass points), **7** bridages, **6** ... what?
 Lines, I guess :-) The eight trigrams of the bāguà (八卦) were already in my
 head as possible inspiration for a name, so it was a small leap to six lines
 for a hexagram of the Zhōu yì (周易, also known as the [Yijing][yijing]).
-The next step was looking that the various translations of the 64 hexagrams of
+The next step was looking at the various translations of the 64 hexagrams of
 the Zhōu yì to find one that fit with the spirit of building good games for
 all.
 
@@ -105,7 +121,7 @@ underlying database, and set it as the Gihub org's description:
 Let the world-building commence ...
 
 
-## License
+## License [&#x219F;](#contents)
 
 Copyright © 2018, Hexagram30
 
@@ -114,6 +130,8 @@ Apache License, Version 2.0
 
 <!-- Named page links below: /-->
 
+[logo]: XXX
+[logo-large]: XXX
 [clojure]: http://clojure.org/
 [clojure-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/clojure.png
 [orientdb-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/orientdb.png
