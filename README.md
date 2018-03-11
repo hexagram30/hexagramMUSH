@@ -130,8 +130,6 @@ Apache License, Version 2.0
 
 <!-- Named page links below: /-->
 
-<!-- Named page links below: /-->
-
 [logo]: https://raw.githubusercontent.com/hexagram30/resources/master/branding/logo/hmush-logo-1-long-with-text-x806.png
 [logo-large]: https://raw.githubusercontent.com/hexagram30/resources/master/branding/logo/hmush-logo-1-long-with-text-x4030.png
 [clojure]: http://clojure.org/
