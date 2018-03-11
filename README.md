@@ -9,11 +9,11 @@ being constructed. To see the progress on those, visit the
 
 ## Dependencies
 
-* [![][clojure-logo]][clojure] Clojure
-* [![][orientdb-logo]][orientdb] OrientDB
-* [![][7bridges-logo]][clj-odbp] clj-odbp
-* `lein`
-* The various supporting hexagram30 subprojects
+| [![][clojure-logo]][clojure] | [![][orientdb-logo]][orientdb] | [![][7bridges-logo]][clj-odbp] |
+|:----------------------------:|:------------------------------:|:------------------------------:|
+| Clojure                      | OrientDB                       | clj-odbp                       |
+|                              | `lein`                         |                                |
+|                              |The various supporting hexagram30 subprojects |                  |
 
 For development environments, all but `lein` are downloaded automatically.
 For a production deployment, you will most likely not want to run an
