@@ -1,0 +1,12 @@
+{:telnet {
+   ;; (reduce + (map int "HexagramMUSH"))
+   :port 1130}
+ :ssl? false
+ :logging {
+   :level :debug
+   :nss [io.netty hexagram30]}
+ :ssh {}
+ :httpd {
+   :port 1180}
+ :database {
+   :port 1199}}
