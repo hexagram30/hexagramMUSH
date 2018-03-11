@@ -9,11 +9,15 @@ being constructed. To see the progress on those, visit the
 
 ## Dependencies
 
-* [![][clojure-logo]][clojure] Clojure (downloaded automatically)
-* [![][orinetdb-logo]][orinetdb] OrientDB
-* [![][7bridges-logo]][clj-odbp] clj-odbp (downloaded automatically)
+* [![][clojure-logo]][clojure] Clojure
+* [![][orientdb-logo]][orientdb] OrientDB
+* [![][7bridges-logo]][clj-odbp] clj-odbp
 * `lein`
-* The various supporting hexagram30 subprojects (downloaded automatically)
+* The various supporting hexagram30 subprojects
+
+For development environments, all but `lein` are downloaded automatically.
+For a production deployment, you will most likely not want to run an
+embedded OrientDB, but rather one as its own service.
 
 
 ## Installation
@@ -112,8 +116,8 @@ Apache License, Version 2.0
 
 [clojure]: http://clojure.org/
 [clojure-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/clojure.png
-[orignetdb-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/orientdb.png
-[orient-db]: https://orientdb.com/
+[orientdb-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/orientdb.png
+[orientdb]: https://orientdb.com/
 [7bridges]: https://7bridges.eu/
 [7bridges-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/7bridges.png
 [clj-odbp]: https://github.com/7bridges-eu/clj-odbp
