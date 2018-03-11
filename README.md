@@ -9,7 +9,11 @@ being constructed. To see the progress on those, visit the
 
 ## Dependencies
 
-TBD
+* [![][clojure-logo]][clojure] Clojure (downloaded automatically)
+* [![][orinetdb-logo]][orinetdb] OrientDB
+* [![][7bridges-logo]][clj-odbp] clj-odbp (downloaded automatically)
+* `lein`
+* The various supporting hexagram30 subprojects (downloaded automatically)
 
 
 ## Installation
@@ -51,7 +55,7 @@ This project has been many, many years in the making, almost since my first
 playing of a text adventure game on a CP\M machine in 1981. Over the years,
 I have made several attempts in several different languages. For the past
 ten years or so, all of my plans were based on my experience with
-[PennMUSH](https://github.com/pennmush/) of the TinyMUD lineage.
+[PennMUSH][pennmush] of the TinyMUD lineage.
 
 As wonderful as PennMUSH is, thera re many thing about it which I would
 change, mostly from an infrastructure and organization perspective. The
@@ -62,11 +66,10 @@ as well.
 
 To make things more difficult, I wanted a database that perfecly matched the
 usage of connection-based world-creation. As such, I eventually turned my eye
-to Graph datbases, and settled on [OrientDB](https://orientdb.com/) (and a
-corresponding [Clojure library](https://github.com/7bridges-eu/clj-odbp) by
-[7bridges](https://7bridges.eu/)). With this
-in hand, the project finally started to gain steam and the component
-architecutre started to take shape.
+to Graph datbases, and settled on [OrientDB][orient-db] (and a corresponding
+[Clojure library][clj-odpb] by [7bridges][7bridges]). With this in hand, the
+project finally started to gain steam and the component architecutre started
+to take shape.
 
 The next thing needed, before coding on this iteration could commense, was a
 name. Here's what we had:
@@ -76,10 +79,10 @@ name. Here's what we had:
 Hey, there's a pattern! **8** (compass points), **7** bridages, **6** ... what?
 Lines, I guess :-) The eight trigrams of the bāguà (八卦) were already in my
 head as possible inspiration for a name, so it was a small leap to six lines
-for a hexagram of the Zhōu yì (周易, also known as the
-[I Ching](https://en.wikipedia.org/wiki/I_Ching)). The next step was looking
-that the various translations of the 64 hexagrams of the Zhōu yì to find one
-that fit with the spirit of building good games for all.
+for a hexagram of the Zhōu yì (周易, also known as the [Yijing][yijing]).
+The next step was looking that the various translations of the 64 hexagrams of
+the Zhōu yì to find one that fit with the spirit of building good games for
+all.
 
 Eventually, I settled on ䷝, hexagram 30 - lí (離):
 
@@ -95,9 +98,24 @@ underlying database, and set it as the Gihub org's description:
 
 *The sun rises, an image of fire. A net of radiance illumines the eight points: clarity.*
 
+Let the world-building commence ...
+
 
 ## License
 
 Copyright © 2018, Hexagram30
 
 Apache License, Version 2.0
+
+
+<!-- Named page links below: /-->
+
+[clojure]: http://clojure.org/
+[clojure-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/clojure.png
+[orignetdb-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/orientdb.png
+[orient-db]: https://orientdb.com/
+[7bridges]: https://7bridges.eu/
+[7bridges-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/7bridges.png
+[clj-odbp]: https://github.com/7bridges-eu/clj-odbp
+[pennmush]: https://github.com/pennmush]
+[yijing]: https://en.wikipedia.org/wiki/I_Ching
