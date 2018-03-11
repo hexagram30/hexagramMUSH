@@ -1,6 +1,11 @@
-(ns hexagram30.mush.core)
+(ns hexagram30.mush.core
+  (:require
+    [clojusc.twig :as logger]
+    [com.stuartsierra.component :as component]
+    [hexagram30.mush.components.core :as system]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn -main
+  []
+  (logger/set-level! '[hexagram30] :info)
+  (component/start (system/init))
+  (.join (Thread/currentThread)))

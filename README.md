@@ -70,8 +70,8 @@ as well.
 
 To make things more difficult, I wanted a database that perfecly matched the
 usage of connection-based world-creation. As such, I eventually turned my eye
-to Graph datbases, and settled on [OrientDB][orient-db] (and a corresponding
-[Clojure library][clj-odpb] by [7bridges][7bridges]). With this in hand, the
+to Graph datbases, and settled on [OrientDB][orientdb] (and a corresponding
+[Clojure library][clj-odbp] by [7bridges][7bridges]). With this in hand, the
 project finally started to gain steam and the component architecutre started
 to take shape.
 
