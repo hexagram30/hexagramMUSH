@@ -1,6 +1,6 @@
 # hexagramMUSH
 
-*A JVM (Clojure) MUSH Platform, built on a graph database*
+*A JVM (Clojure) MUSH platform, built on a graph database*
 
 [![][logo]][logo-large]
 
