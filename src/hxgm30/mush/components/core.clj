@@ -1,11 +1,11 @@
-(ns hexagram30.mush.components.core
+(ns hxgm30.mush.components.core
   (:require
     [com.stuartsierra.component :as component]
-    [hexagram30.mush.components.config :as config]
-    [hexagram30.mush.components.database :as database]
-    [hexagram30.mush.components.httpd :as httpd]
-    [hexagram30.mush.components.logging :as logging]
-    [hexagram30.mush.components.terminal :as terminal]))
+    [hxgm30.mush.components.config :as config]
+    [hxgm30.mush.components.database :as database]
+    [hxgm30.mush.components.httpd :as httpd]
+    [hxgm30.mush.components.logging :as logging]
+    [hxgm30.mush.components.terminal :as terminal]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   Common Configuration Components   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

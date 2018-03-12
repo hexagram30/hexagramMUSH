@@ -1,8 +1,8 @@
-(ns hexagram30.mush.core
+(ns hxgm30.mush.core
   (:require
     [clojusc.twig :as logger]
     [com.stuartsierra.component :as component]
-    [hexagram30.mush.components.core :as system]))
+    [hxgm30.mush.components.core :as system]))
 
 (defn -main
   []

@@ -1,7 +1,7 @@
-(ns hexagram30.mush.components.database
+(ns hxgm30.mush.components.database
   (:require
    [com.stuartsierra.component :as component]
-   [hexagram30.mush.components.config :as config]
+   [hxgm30.mush.components.config :as config]
    [taoensso.timbre :as log]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1,8 +1,8 @@
-(ns hexagram30.mush.components.logging
+(ns hxgm30.mush.components.logging
   (:require
     [clojusc.twig :as logger]
     [com.stuartsierra.component :as component]
-    [hexagram30.mush.components.config :as config]
+    [hxgm30.mush.components.config :as config]
     [taoensso.timbre :as log]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

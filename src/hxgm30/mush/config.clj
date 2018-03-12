@@ -1,6 +1,6 @@
-(ns hexagram30.mush.config
+(ns hxgm30.mush.config
   (:require
-   [hexagram30.common.file :as common]))
+   [hxgm30.common.file :as common]))
 
 (def config-file "hexagram30-config/mush.edn")
 
