@@ -5,10 +5,14 @@
     :name "Apache License, Version 2.0"
     :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
+    [clojusc/trifl "0.2.0"]
     [clojusc/twig "0.3.2"]
     [com.stuartsierra/component "0.3.2"]
     [hexagram30/common "0.1.0-SNAPSHOT"]
     [hexagram30/graphdb "0.1.0-SNAPSHOT"]
     [hexagram30/terminal "0.1.0-SNAPSHOT"]
     [org.clojure/clojure "1.8.0"]]
-  :main hxgm30.mush.core)
+  :main hxgm30.mush.core
+  :aot [hxgm30.mush.core]
+  :aliases {
+    "start" ["trampoline" "run"]})
