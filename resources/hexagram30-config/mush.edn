@@ -4,7 +4,7 @@
  :ssl? false
  :logging {
    :level :debug
-   :nss [io.netty hexagram30]}
+   :nss [io.netty hxgm30]}
  :ssh {}
  :httpd {
    :port 1180}
