@@ -21,6 +21,7 @@
     :name "Apache License, Version 2.0"
     :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
+    [clojusc/trifl "0.2.0"]
     [clojusc/twig "0.3.2"]
     [com.stuartsierra/component "0.3.2"]
     [hexagram30/common "0.1.0-SNAPSHOT"]
@@ -28,14 +29,15 @@
     [hexagram30/terminal "0.1.0-SNAPSHOT"]
     [org.clojure/clojure "1.8.0"]]
   :main hxgm30.mush.core
-    :plugins [
-    [venantius/ultra "0.5.2"]]
+  :aot [hxgm30.mush.core]
   :profiles {
     :ubercompile {
       :aot :all}
     :dev {
       :dependencies [
         [org.clojure/tools.namespace "0.2.11"]]
+      :plugins [
+        [venantius/ultra "0.5.2"]]
       :source-paths ["dev-resources/src"]
       :repl-options {
         :init-ns hxgm30.graphdb.dev
@@ -56,6 +58,8 @@
         :jvm-opts ["-XX:MaxDirectMemorySize=512g"]
         :main hxgm30.graphdb.server}}
   :aliases {
+    ;; App Aliases
+    "start" ["trampoline" "run"]
     ;; Dev Aliases
     "ubercompile" ["do"
       ["clean"]
