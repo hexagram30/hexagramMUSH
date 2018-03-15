@@ -12,7 +12,7 @@
 
 (defn -main
   []
-  (logger/set-level! '[hexagram30] :info)
+  (logger/set-level! '[hxgm30] :info)
   (log/info "Bringing up HexagramMUSH system ...")
   (let [system (system/init)]
     (component/start system)

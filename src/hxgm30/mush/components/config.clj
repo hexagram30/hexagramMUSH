@@ -29,6 +29,12 @@
   [system]
   (get-in (get-cfg system) [:telnet :port]))
 
+;;  nREPL config
+
+(defn nrepl-port
+  [system]
+  (get-in (get-cfg system) [:nrepl :port]))
+
 ;;  mush config
 
 (defn log-level

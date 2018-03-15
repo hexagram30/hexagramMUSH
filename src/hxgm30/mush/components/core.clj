@@ -5,6 +5,7 @@
     [hxgm30.mush.components.database :as database]
     [hxgm30.mush.components.httpd :as httpd]
     [hxgm30.mush.components.logging :as logging]
+    [hxgm30.mush.components.nrepl :as nrepl]
     [hxgm30.mush.components.terminal :as terminal]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -34,11 +35,16 @@
            (terminal/create-component)
            [:config :logging :database])})
 
+(def nrepl
+  {:nrepl (component/using
+           (nrepl/create-component)
+           [:config :logging :database :terminal])})
+
 (def common
   (merge cfg log db))
 
 (def terminal-only
-  (merge common terminal))
+  (merge common terminal nrepl))
 
 (def with-web
   (merge terminal-only httpd))

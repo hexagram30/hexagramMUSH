@@ -1,11 +1,14 @@
 {:telnet {
    ;; (reduce + (map int "HexagramMUSH"))
-   :port 1130}
- :ssl? false
+   :port 1130
+   :ssl {:enabled? true
+         :fqdn "hexagram30.mush"
+         :pkey-bits 4096}}
+ :nrepl {
+   :port 1131}
  :logging {
    :level :debug
-   :nss [io.netty hxgm30]}
- :ssh {}
+   :nss [io.netty clojure.tools.nrepl hxgm30]}
  :httpd {
    :port 1180}
  :database {

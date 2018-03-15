@@ -1,12 +1,13 @@
-(ns hxgm30.mush.components.terminal
+(ns hxgm30.mush.components.nrepl
   (:require
+    [clojure.tools.nrepl.server :as nrepl]
     [com.stuartsierra.component :as component]
     [hxgm30.mush.components.config :as config]
     [hxgm30.terminal.telnet.server :as telnet]
     [taoensso.timbre :as log]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;   Telnet Server Component API   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;   nREPL Server Component API   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; TBD
@@ -15,32 +16,30 @@
 ;;;   Component Lifecycle Implementation   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defrecord Telnet [server])
+(defrecord REPL [server])
 
 (defn start
   [this]
-  (log/info "Starting telnet component ...")
-  (let [port (config/telnet-port this)
-        ssl? true
-        server (telnet/init)]
-    (telnet/start server port ssl?)
-    (log/debugf "Telnet server is listening on port %s" port)
-    (log/debug "Started telnet component.")
+  (log/info "Starting nREPL component ...")
+  (let [port (config/nrepl-port this)
+        server (nrepl/start-server :port port)]
+    (log/debugf "nREPL server is listening on port %s" port)
+    (log/debug "Started nREPL component.")
     (assoc this :server server)))
 
 (defn stop
   [this]
-  (log/info "Stopping telnet component ...")
+  (log/info "Stopping nREPL component ...")
   (if-let [server (:server this)]
-    (telnet/stop server))
-  (log/debug "Stopped telnet component.")
+    (nrepl/stop-server server))
+  (log/debug "Stopped nREPL component.")
   (assoc this :server nil))
 
 (def lifecycle-behaviour
   {:start start
    :stop stop})
 
-(extend Telnet
+(extend REPL
   component/Lifecycle
   lifecycle-behaviour)
 
@@ -51,4 +50,4 @@
 (defn create-component
   ""
   []
-  (map->Telnet {}))
+  (map->REPL {}))

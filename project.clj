@@ -27,7 +27,8 @@
     [hexagram30/common "0.1.0-SNAPSHOT"]
     [hexagram30/graphdb "0.1.0-SNAPSHOT"]
     [hexagram30/terminal "0.1.0-SNAPSHOT"]
-    [org.clojure/clojure "1.8.0"]]
+    [org.clojure/clojure "1.8.0"]
+    [org.clojure/tools.nrepl "0.2.12"]]
   :main hxgm30.mush.core
   :aot [hxgm30.mush.core]
   :profiles {
@@ -40,7 +41,7 @@
         [venantius/ultra "0.5.2"]]
       :source-paths ["dev-resources/src"]
       :repl-options {
-        :init-ns hxgm30.graphdb.dev
+        :init-ns hxgm30.mush.dev
         :prompt ~get-prompt
         :init ~(println (get-banner))}}
     :lint {
