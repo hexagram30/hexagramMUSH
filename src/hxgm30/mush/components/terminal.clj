@@ -21,10 +21,11 @@
   [this]
   (log/info "Starting telnet component ...")
   (let [port (config/telnet-port this)
-        ssl? true
+        ssl (config/telnet-ssl this)
         server (telnet/init)]
-    (telnet/start server port ssl?)
+    (telnet/start server port ssl)
     (log/debugf "Telnet server is listening on port %s" port)
+    (log/trace "With ssl config:" ssl)
     (log/debug "Started telnet component.")
     (assoc this :server server)))
 
