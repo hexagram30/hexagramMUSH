@@ -30,7 +30,9 @@
     [org.clojure/clojure "1.8.0"]
     [org.clojure/tools.nrepl "0.2.12"]]
   :main hxgm30.mush.core
-  :aot [hxgm30.mush.core]
+  :aot [
+    clojure.tools.logging.impl
+    hxgm30.mush.core]
   :profiles {
     :ubercompile {
       :aot :all}
@@ -60,7 +62,10 @@
         :main hxgm30.graphdb.server}}
   :aliases {
     ;; App Aliases
-    "start" ["trampoline" "run"]
+    "start" ["do"
+      ["clean"]
+      ;["ubercompile"]
+      ["trampoline" "run"]]
     ;; Dev Aliases
     "ubercompile" ["do"
       ["clean"]
