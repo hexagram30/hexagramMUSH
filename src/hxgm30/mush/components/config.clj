@@ -29,6 +29,10 @@
   [system]
   (get-in (get-cfg system) [:telnet :port]))
 
+(defn telnet-ssl
+  [system]
+  (get-in (get-cfg system) [:telnet :ssl]))
+
 ;;  nREPL config
 
 (defn nrepl-port
