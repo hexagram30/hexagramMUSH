@@ -8,8 +8,11 @@
    :port 1131}
  :logging {
    :level :debug
-   :nss [io.netty clojure.tools.nrepl hxgm30]}
+   :nss [io.netty clojure.tools.nrepl taoensso.carmine hxgm30]}
  :httpd {
    :port 1180}
- :database {
-   :port 1199}}
+ :backend {
+   :plugin :redis
+   :redis {
+     :host "localhost"
+     :port 6379}}}

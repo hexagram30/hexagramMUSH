@@ -1,53 +1,69 @@
 (ns hxgm30.mush.components.core
   (:require
     [com.stuartsierra.component :as component]
+    [hxgm30.graphdb.plugin.backend :as db-backend]
     [hxgm30.mush.components.config :as config]
-    [hxgm30.mush.components.database :as database]
     [hxgm30.mush.components.httpd :as httpd]
     [hxgm30.mush.components.logging :as logging]
     [hxgm30.mush.components.nrepl :as nrepl]
-    [hxgm30.mush.components.terminal :as terminal]))
+    [hxgm30.mush.components.terminal :as terminal]
+    [taoensso.timbre :as log]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   Common Configuration Components   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def cfg
-  {:config (config/create-component)})
+(defn cfg
+  [cfg-data]
+  {:config (config/create-component cfg-data)})
 
 (def log
   {:logging (component/using
              (logging/create-component)
              [:config])})
 
-(def db
-  {:database (component/using
-         (database/create-component)
-         [:config :logging])})
+(defn db
+  [cfg-data]
+  (log/trace "cfg-data:" cfg-data)
+  (let [backend (get-in cfg-data [:backend :plugin])]
+    (log/trace "backend:" backend)
+    {:backend (component/using
+               (db-backend/create-component backend)
+               (db-backend/get-component-deps backend))}))
 
 (def httpd
   {:httpd (component/using
            (httpd/create-component)
-           [:config :logging :database])})
+           [:config :logging :backend])})
 
 (def terminal
   {:terminal (component/using
            (terminal/create-component)
-           [:config :logging :database])})
+           [:config :logging :backend])})
 
 (def nrepl
   {:nrepl (component/using
            (nrepl/create-component)
-           [:config :logging :database :terminal])})
+           [:config :logging :backend :terminal])})
 
-(def common
-  (merge cfg log db))
+(defn common
+  [cfg-data]
+  (merge (cfg cfg-data)
+         log
+         (db cfg-data)))
 
-(def terminal-only
-  (merge common terminal nrepl))
+(defn with-terminal-only
+  [cfg-data]
+  (merge (common cfg-data)
+         terminal
+         nrepl))
 
-(def with-web
-  (merge terminal-only httpd))
+(defn with-web
+  [cfg-data]
+  (merge (common cfg-data)
+         terminal
+         nrepl
+         httpd))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   Component Initializations   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,15 +71,21 @@
 
 (defn initialize-bare-bones
   []
-  (component/map->SystemMap common))
+  (-> (config/build-config)
+      common
+      component/map->SystemMap))
 
 (defn initialize-with-terminal
   []
-  (component/map->SystemMap terminal-only))
+  (-> (config/build-config)
+      with-terminal-only
+      component/map->SystemMap ))
 
 (defn initialize-with-web
   []
-  (component/map->SystemMap with-web))
+  (-> (config/build-config)
+      with-web
+      component/map->SystemMap))
 
 (def init-lookup
   {:basic #'initialize-bare-bones

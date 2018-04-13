@@ -23,6 +23,12 @@
 ;;;   Config Component API   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;  Database config
+
+(defn db-plugin
+  [system]
+  (get-in (get-cfg system) [:backend :plugin]))
+
 ;;  Terminal config
 
 (defn telnet-port
@@ -39,7 +45,7 @@
   [system]
   (get-in (get-cfg system) [:nrepl :port]))
 
-;;  mush config
+;;  Logging config
 
 (defn log-level
   [system]
@@ -48,6 +54,7 @@
 (defn log-nss
   [system]
   (get-in (get-cfg system) [:logging :nss]))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   Component Lifecycle Implementation   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -58,10 +65,9 @@
 (defn start
   [this]
   (log/info "Starting config component ...")
-  (let [cfg (build-config)]
-    (log/trace "Built configuration:" cfg)
-    (log/debug "Started config component.")
-    (assoc this :data cfg)))
+  (log/debug "Using configuration:" (:data this))
+  (log/debug "Started config component.")
+  this)
 
 (defn stop
   [this]
@@ -83,5 +89,5 @@
 
 (defn create-component
   ""
-  []
-  (map->Config {}))
+  [cfg-data]
+  (map->Config {:data cfg-data}))

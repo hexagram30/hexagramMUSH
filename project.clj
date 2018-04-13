@@ -26,14 +26,15 @@
     [com.stuartsierra/component "0.3.2"]
     [hexagram30/common "0.1.0-SNAPSHOT"]
     [hexagram30/graphdb "0.1.0-SNAPSHOT"]
+    [hexagram30/graphdb-redis-plugin "0.1.0-SNAPSHOT"]
     [hexagram30/terminal "0.1.0-SNAPSHOT"]
     [org.clojure/clojure "1.8.0"]
     [org.clojure/tools.nrepl "0.2.12"]]
   :main hxgm30.mush.core
-  :aot [
-    clojure.tools.logging.impl
-    hxgm30.mush.core]
+  :aot [hxgm30.mush.core]
   :profiles {
+    :precompile {
+      :aot [clojure.tools.logging.impl]}
     :ubercompile {
       :aot :all}
     :dev {
@@ -67,8 +68,13 @@
       ;["ubercompile"]
       ["trampoline" "run"]]
     ;; Dev Aliases
+    "repl" ["do"
+      ["clean"]
+      ["with-profile" "+precompile" "compile"]
+      ["repl"]]
     "ubercompile" ["do"
       ["clean"]
+      ["with-profile" "+precompile" "compile"]
       ["with-profile" "+ubercompile" "compile"]]
     "check-vers" ["with-profile" "+lint" "ancient" "check" ":all"]
     "check-jars" ["with-profile" "+lint" "do"
