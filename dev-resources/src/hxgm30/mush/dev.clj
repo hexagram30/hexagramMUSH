@@ -8,6 +8,7 @@
     [clojusc.twig :as logger]
     [com.stuartsierra.component :as component]
     [hxgm30.graphdb.plugin.backend :as graphdb-backend]
+    [hxgm30.graphdb.plugin.redis.component :as redis-comp]
     [hxgm30.mush.components.config :as config]
     [hxgm30.mush.components.core]
     [trifl.java :refer [show-methods]]))
@@ -84,6 +85,10 @@
       (alter-var-root #'*mgr* (constantly nil))
       result)))
 
+(defn db*
+  [func & args]
+  (redis-comp/db-call (system) func args))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   Reloading Management   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -97,9 +102,8 @@
 
 (comment
   (startup)
-  (graphdb-backend/db-call (backend) (system) 'vertices)
-  (def cave (db/add-vertex g {:type :room :name "A cave" :description "You are in a dark cave."}))
-  (def tunnel (db/add-vertex g {:type :room
-                                :name "A tunnel"
-                                :description "You are in a long, dark tunnel."}))
+  (db* 'vertices)
+  (db* 'get-vertex "node:820fd255-039c-4f47-aa1a-fcd5634ff008")
+  (def cave (db* 'add-vertex g {:type :room :name "A cave" :description "You are in a dark cave."}))
+  (def tunnel (db* 'add-vertex g {:type :room :name "A tunnel" :description "You are in a long, dark tunnel."}))
   )
