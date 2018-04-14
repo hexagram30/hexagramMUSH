@@ -41,6 +41,7 @@
       :dependencies [
         [org.clojure/tools.namespace "0.2.11"]]
       :plugins [
+        [lein-shell "0.5.0"]
         [venantius/ultra "0.5.2"]]
       :source-paths ["dev-resources/src"]
       :repl-options {
@@ -72,6 +73,18 @@
       ["clean"]
       ["with-profile" "+precompile" "compile"]
       ["repl"]]
+    "extract-docker-compose"
+      ["run" "-m" "hxgm30.mush.cli.extract" "docker/docker-compose-redis.yml"]
+    "start-db" ["do"
+      ["extract-docker-compose"]
+      ["shell" "docker-compose"
+                 "-f" "/tmp/docker/docker-compose-redis.yml"
+                 "up" "--remove-orphans"]]
+    "stop-db" ["do"
+      ["extract-docker-compose"]
+      ["shell" "docker-compose"
+                 "-f" "/tmp/docker/docker-compose-redis.yml"
+                 "down"]]
     "ubercompile" ["do"
       ["clean"]
       ["with-profile" "+precompile" "compile"]
@@ -90,6 +103,4 @@
       ;["eastwood"]
       ]
     "ltest" ["with-profile" "+test" "ltest"]
-    "start-db" ["do"
-      ["clean"]
-      ["with-profile" "+server" "run"]]})
+    })
