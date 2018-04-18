@@ -130,8 +130,8 @@ Apache License, Version 2.0
 
 <!-- Named page links below: /-->
 
-[logo]: https://raw.githubusercontent.com/hexagram30/resources/master/branding/logo/hmush-logo-1-long-with-text-x806.png
-[logo-large]: https://raw.githubusercontent.com/hexagram30/resources/master/branding/logo/hmush-logo-1-long-with-text-x4030.png
+[logo]: https://raw.githubusercontent.com/hexagram30/resources/master/branding/logo/hmush-logo-2-long-with-text-x811.png
+[logo-large]: https://raw.githubusercontent.com/hexagram30/resources/master/branding/logo/hmush-logo-2-long-with-text-x4030.png
 [clojure]: http://clojure.org/
 [clojure-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/clojure.png
 [orientdb-logo]: https://raw.githubusercontent.com/hexagram30/resources/master/images/logos/orientdb.png
