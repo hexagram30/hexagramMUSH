@@ -121,6 +121,20 @@ underlying database, and set it as the Gihub org's description:
 Let the world-building commence ...
 
 
+## Donating
+
+A donation account for supporting development on this project has been set up
+on Liberapay here:
+
+* [https://liberapay.com/hexagram30/donate](https://liberapay.com/hexagram30/donate)
+
+You can learn more about Liberapay on its [Wikipedia entry][libera-wiki] or on the
+service's ["About" page][libera-about].
+
+[libera-wiki]: https://en.wikipedia.org/wiki/Liberapay
+[libera-about]: https://liberapay.com/about/
+
+
 ## License [&#x219F;](#contents)
 
 Copyright © 2018, Hexagram30
