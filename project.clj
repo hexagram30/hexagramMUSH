@@ -21,18 +21,17 @@
     :name "Apache License, Version 2.0"
     :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
-    [clojusc/trifl "0.2.0"]
-    [clojusc/twig "0.3.2"]
+    [clojusc/trifl "0.3.0"]
+    [clojusc/twig "0.3.3"]
     [com.stuartsierra/component "0.3.2"]
     [hexagram30/common "0.1.0-SNAPSHOT"]
     [hexagram30/dice "0.1.0-SNAPSHOT"]
     [hexagram30/graphdb "0.1.0-SNAPSHOT"]
-    [hexagram30/graphdb-redis-plugin "0.1.0-SNAPSHOT"]
     [hexagram30/language "4.2.0-SNAPSHOT"]
     [hexagram30/map "0.1.0-SNAPSHOT"]
     [hexagram30/terminal "0.1.0-SNAPSHOT"]
     [org.clojure/clojure "1.9.0"]
-    [org.clojure/tools.nrepl "0.2.12"]]
+    [org.clojure/tools.nrepl "0.2.13"]]
   :main hxgm30.mush.core
   :aot [hxgm30.mush.core]
   :profiles {
@@ -48,23 +47,38 @@
         [venantius/ultra "0.5.2"]]
       :source-paths ["dev-resources/src"]
       :repl-options {
-        :init-ns hxgm30.mush.dev
+        :init-ns hxgm30.mush.repl
         :prompt ~get-prompt
         :init ~(println (get-banner))}}
+    :redis-plugin {
+      :jvm-opts [
+        "-Dgraphdb.backend=redis"
+        "-Dgraphdb.backend.subtype=graphdb"
+        "-Ddb.backend=redis"
+        "-Ddb.backend.subtype=db"]
+      :dependencies [
+        [hexagram30/redis-db-plugin "0.1.0-SNAPSHOT"]]
+      :aliases {
+        "read-db-cfg" ["run" "-m" "hxgm30.db.plugin.docker" "read" "compose-redis-db.yml"]
+        "start-db" ["run" "-m" "hxgm30.db.plugin.docker" "up" "compose-redis-db.yml"]
+        "stop-db" ["run" "-m" "hxgm30.db.plugin.docker" "down" "compose-redis-db.yml"]
+        "read-graphdb-cfg" ["run" "-m" "hxgm30.db.plugin.docker" "read" "compose-redis-graphdb.yml"]
+        "start-graphdb" ["run" "-m" "hxgm30.db.plugin.docker" "up" "compose-redis-graphdb.yml"]
+        "stop-graphdb" ["run" "-m" "hxgm30.db.plugin.docker" "down" "compose-redis-graphdb.yml"]}}
     :lint {
       :source-paths ^:replace ["src"]
       :test-paths ^:replace []
       :plugins [
-        [jonase/eastwood "0.2.5"]
+        [jonase/eastwood "0.2.9"]
         [lein-ancient "0.6.15"]
         [lein-bikeshed "0.5.1"]
         [lein-kibit "0.1.6"]
-        [venantius/yagni "0.1.4"]]}
+        [venantius/yagni "0.1.6"]]}
     :test {
-      :plugins [[lein-ltest "0.3.0"]]}
+      :plugins [[lein-ltest "0.3.0"]]
       :server {
         :jvm-opts ["-XX:MaxDirectMemorySize=512g"]
-        :main hxgm30.graphdb.server}}
+        :main hxgm30.mush.core}}}
   :aliases {
     ;; App Aliases
     "start" ["do"
@@ -76,18 +90,6 @@
       ["clean"]
       ["with-profile" "+precompile" "compile"]
       ["repl"]]
-    "extract-docker-compose"
-      ["run" "-m" "hxgm30.mush.cli.extract" "docker/docker-compose-redis.yml"]
-    "start-db" ["do"
-      ["extract-docker-compose"]
-      ["shell" "docker-compose"
-                 "-f" "/tmp/docker/docker-compose-redis.yml"
-                 "up" "--remove-orphans"]]
-    "stop-db" ["do"
-      ["extract-docker-compose"]
-      ["shell" "docker-compose"
-                 "-f" "/tmp/docker/docker-compose-redis.yml"
-                 "down"]]
     "ubercompile" ["do"
       ["clean"]
       ["with-profile" "+precompile" "compile"]
@@ -105,5 +107,4 @@
       ["kibit"]
       ;["eastwood"]
       ]
-    "ltest" ["with-profile" "+test" "ltest"]
-    })
+    "ltest" ["with-profile" "+test" "ltest"]})
