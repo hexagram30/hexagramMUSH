@@ -1,18 +1,27 @@
-{:telnet {
-   ;; (reduce + (map int "HexagramMUSH"))
-   :port 1130
-   :ssl {:enabled? true
-         :fqdn "hexagram30.mush"
-         :pkey-bits 4096}}
- :nrepl {
-   :port 1131}
- :logging {
-   :level :debug
-   :nss [io.netty clojure.tools.nrepl taoensso.carmine hxgm30]}
- :httpd {
-   :port 1180}
- :backend {
+{:backend {
    :plugin :redis
+   :type :graphdb
    :redis {
      :host "localhost"
-     :port 6379}}}
+     :port 6379}}
+ :httpd {
+   :port 1180}
+ :lang {
+   :generator {
+     :default-mode :markov}}
+ :logging {
+   :level :debug
+   :nss [io.netty clojure.tools.nrepl taoensso.carmine hxgm30]
+   :color true}
+ :nrepl {
+   :port 1131}
+ :rng {
+   :algorithm :non-blocking
+   :seed-bytes 1024}
+ :telnet {
+   ;; (reduce + (map int "HexagramMUSH"))
+   :port 1130
+   :ssl {
+     :enabled? true
+     :fqdn "hexagram30.mush"
+     :pkey-bits 4096}}}
