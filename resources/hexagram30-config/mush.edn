@@ -1,9 +1,14 @@
 {:backend {
    :plugin :redis
-   :type :graphdb
-   :redis {
-     :host "localhost"
-     :port 6379}}
+   :subtype :graphdb
+   :db {
+     :redis {
+       :host "localhost"
+       :port 6389}}
+   :graphdb {
+     :redis {
+       :host "localhost"
+       :port 6379}}}
  :httpd {
    :port 1180}
  :lang {
@@ -18,10 +23,16 @@
  :rng {
    :algorithm :non-blocking
    :seed-bytes 1024}
- :telnet {
-   ;; (reduce + (map int "HexagramMUSH"))
-   :port 1130
-   :ssl {
-     :enabled? true
-     :fqdn "hexagram30.mush"
-     :pkey-bits 4096}}}
+ :terminal {
+   :telnet {
+     ;; (reduce + (map int "HexagramMUSH"))
+     :port 1130}
+   :telnet-ssl {
+     :port 1122
+     :key-gen {
+       :fqdn "mush.hexagram30.cnbb."
+       :pkey-bits 4096}}
+   :connection {
+     :threads 1
+     :worker {
+       :threads 2}}}}
