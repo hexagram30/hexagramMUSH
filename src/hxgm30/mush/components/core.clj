@@ -1,12 +1,15 @@
 (ns hxgm30.mush.components.core
   (:require
     [com.stuartsierra.component :as component]
-    [hxgm30.graphdb.plugin.backend :as db-backend]
+    [hxgm30.db.plugin.backend :as db-backend]
+    [hxgm30.dice.components.random :as random]
+    ; [hxgm30.language.components.lang :as lang]
     [hxgm30.mush.components.config :as config]
     [hxgm30.mush.components.httpd :as httpd]
     [hxgm30.mush.components.logging :as logging]
-    [hxgm30.mush.components.nrepl :as nrepl]
-    [hxgm30.mush.components.terminal :as terminal]
+    [hxgm30.shell.components.nrepl :as nrepl]
+    [hxgm30.terminal.components.telnet :as telnet]
+    [hxgm30.terminal.components.telnet-ssl :as telnet-ssl]
     [taoensso.timbre :as log]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -22,6 +25,16 @@
              (logging/create-component)
              [:config])})
 
+(def rnd
+  {:random (component/using
+            (random/create-component)
+            [:config :logging])})
+
+; (def language
+;   {:lang (component/using
+;           (lang/create-component)
+;           [:config :logging :random :backend])})
+
 (defn db
   [cfg-data]
   (log/trace "cfg-data:" cfg-data)
@@ -34,34 +47,42 @@
 (def httpd
   {:httpd (component/using
            (httpd/create-component)
-           [:config :logging :backend])})
+           [:config :logging :random :backend])})
 
-(def terminal
-  {:terminal (component/using
-           (terminal/create-component)
-           [:config :logging :backend])})
+(def telnet
+  {:telnet (component/using
+            (telnet/create-component)
+            [:config :logging])})
+
+(def telnet-ssl
+  {:telnet-ssl (component/using
+                (telnet-ssl/create-component)
+                [:config :logging])})
 
 (def nrepl
   {:nrepl (component/using
            (nrepl/create-component)
-           [:config :logging :backend :terminal])})
+           [:config :logging :backend :telnet :telnet-ssl])})
 
 (defn common
   [cfg-data]
   (merge (cfg cfg-data)
+         rnd
          log
          (db cfg-data)))
 
 (defn with-terminal-only
   [cfg-data]
   (merge (common cfg-data)
-         terminal
+         telnet
+         telnet-ssl
          nrepl))
 
 (defn with-web
   [cfg-data]
   (merge (common cfg-data)
-         terminal
+         telnet
+         telnet-ssl
          nrepl
          httpd))
 
