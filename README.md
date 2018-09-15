@@ -8,14 +8,15 @@
 #### Contents
 
 * [Dependencies](#dependencies-)
-* [Installation](#installation-)
 * [Startup](#startup-)
+* [Connecting](#connecting-)
 * [Usage](#usage-)
    * [Registration Mode](#registration-mode-)
    * [Player Mode](#player-mode-)
    * [Builder Mode](#builder-mode-)
    * [Multi-Realm Mode](#multi-realm-mode-)
 * [Background](#background-)
+* [Donating](#donating-)
 * [License](#license-)
 
 This project is in pause while the subprojects upon which it depends are
@@ -25,25 +26,24 @@ being constructed. To see the progress on those, visit the
 
 ## Dependencies [&#x219F;](#contents)
 
-| [![][clojure-logo]][clojure] | [![][orientdb-logo]][orientdb] | [![][7bridges-logo]][clj-odbp] |
-|:----------------------------:|:------------------------------:|:------------------------------:|
-| Clojure                      | OrientDB                       | clj-odbp                       |
-|                              | `lein`                         |                                |
-|                              |The various supporting hexagram30 subprojects |                  |
-
-For development environments, all but `lein` are downloaded automatically.
-For a production deployment, you will most likely not want to run an
-embedded OrientDB, but rather one as its own service.
-
-
-## Installation [&#x219F;](#contents)
-
-TBD
+* Java
+* `lein`
+* Docker
 
 
 ## Startup [&#x219F;](#contents)
 
-TBD
+1. Start the world's graph database: `lein with-profile +redis-plugin start-graphdb`
+1. Start the game's key store: `lein with-profile +redis-plugin start-db`
+1. Ensure they are both running: `docker ps`
+1. Start the MUSH: `lein with-profile +redis-plugin repl` and then `(startup)`
+
+
+## Connecting [&#x219F;](#contents)
+
+Telnet: `rlwrap telnet localhost 1130`
+
+Secure Telnet: `rlwrap ncat --telnet --ssl -n 127.0.0.1 1122`
 
 
 ## Usage [&#x219F;](#contents)
@@ -89,7 +89,8 @@ usage of connection-based world-creation. As such, I eventually turned my eye
 to Graph datbases, and settled on [OrientDB][orientdb] (and a corresponding
 [Clojure library][clj-odbp] by [7bridges][7bridges]). With this in hand, the
 project finally started to gain steam and the component architecutre started
-to take shape.
+to take shape. (Note, however, that I later switched to using Redis -- both
+as the backend for a graph DB as well as a key store.)
 
 The next thing needed, before coding on this iteration could commense, was a
 name. Here's what we had:
@@ -121,7 +122,7 @@ underlying database, and set it as the Gihub org's description:
 Let the world-building commence ...
 
 
-## Donating
+## Donating [&#x219F;](#contents)
 
 A donation account for supporting development on this project has been set up
 on Liberapay here:
