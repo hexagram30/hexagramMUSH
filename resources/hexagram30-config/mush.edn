@@ -23,6 +23,8 @@
  :rng {
    :algorithm :non-blocking
    :seed-bytes 1024}
+ :shell {
+   :default :entry}
  :terminal {
    :telnet {
      ;; (reduce + (map int "HexagramMUSH"))
@@ -30,8 +32,10 @@
    :telnet-ssl {
      :port 1122
      :key-gen {
-       :fqdn "mush.hexagram30.cnbb."
+       :fqdn "mush.hexagram30.cnbb.games"
        :pkey-bits 4096}}
+   :initialization {
+     :max-frame-length 8192}
    :connection {
      :threads 1
      :worker {

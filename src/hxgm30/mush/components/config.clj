@@ -39,7 +39,11 @@
   [system]
   (get-in (get-cfg system) [:telnet :ssl]))
 
-;;  nREPL config
+;;  Shell config
+
+(defn default-shell
+  [system]
+  (get-in (get-cfg system) [:shell :default]))
 
 (defn nrepl-port
   [system]

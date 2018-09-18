@@ -8,6 +8,7 @@
     [hxgm30.mush.components.httpd :as httpd]
     [hxgm30.mush.components.logging :as logging]
     [hxgm30.shell.components.nrepl :as nrepl]
+    [hxgm30.shell.components.registry :as shell-registry]
     [hxgm30.terminal.components.telnet :as telnet]
     [hxgm30.terminal.components.telnet-ssl :as telnet-ssl]
     [taoensso.timbre :as log]))
@@ -49,20 +50,35 @@
            (httpd/create-component)
            [:config :logging :random :backend])})
 
+(def nrepl
+  {:nrepl (component/using
+           (nrepl/create-component)
+           [:config :logging :backend])})
+
+(def shell-reg
+  {:shell (component/using
+           (shell-registry/create-component)
+           [:config :logging :backend])})
+
 (def telnet
   {:telnet (component/using
             (telnet/create-component)
-            [:config :logging])})
+            [:config :logging :random :backend :httpd :shell])})
 
 (def telnet-ssl
   {:telnet-ssl (component/using
                 (telnet-ssl/create-component)
-                [:config :logging])})
+                [:config :logging :random :backend :httpd :shell])})
 
-(def nrepl
-  {:nrepl (component/using
-           (nrepl/create-component)
-           [:config :logging :backend :telnet :telnet-ssl])})
+(def telnet-no-web
+  {:telnet (component/using
+            (telnet/create-component)
+            [:config :logging :random :backend :shell])})
+
+(def telnet-ssl-no-web
+  {:telnet-ssl (component/using
+                (telnet-ssl/create-component)
+                [:config :logging :random :backend :shell])})
 
 (defn common
   [cfg-data]
@@ -74,9 +90,10 @@
 (defn with-terminal-only
   [cfg-data]
   (merge (common cfg-data)
-         telnet
-         telnet-ssl
-         nrepl))
+         telnet-no-web
+         telnet-ssl-no-web
+         nrepl
+         shell-reg))
 
 (defn with-web
   [cfg-data]
@@ -84,7 +101,8 @@
          telnet
          telnet-ssl
          nrepl
-         httpd))
+         httpd
+         shell-reg))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;   Component Initializations   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -100,7 +118,7 @@
   []
   (-> (config/build-config)
       with-terminal-only
-      component/map->SystemMap ))
+      component/map->SystemMap))
 
 (defn initialize-with-web
   []
