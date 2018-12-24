@@ -75,10 +75,10 @@
         [lein-kibit "0.1.6"]
         [venantius/yagni "0.1.7"]]}
     :test {
-      :plugins [[lein-ltest "0.3.0"]]
-      :server {
-        :jvm-opts ["-XX:MaxDirectMemorySize=512g"]
-        :main hxgm30.mush.core}}}
+      :plugins [[lein-ltest "0.3.0"]]}
+    :server {
+      :jvm-opts ["-XX:MaxDirectMemorySize=512g"]
+      :main hxgm30.mush.core}}
   :aliases {
     ;; App Aliases
     "start" ["do"
@@ -116,6 +116,6 @@
       ["lint"]
       ["ltest" ":all"]
       ["uberjar"]]
-    "start-db" ["do"
+    "start-mush" ["do"
       ["clean"]
-      ["with-profile" "+server" "run"]]})
+      ["with-profile" "+server" "trampoline" "run"]]})

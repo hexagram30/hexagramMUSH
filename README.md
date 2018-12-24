@@ -36,7 +36,9 @@ being constructed. To see the progress on those, visit the
 1. Start the world's graph database: `lein with-profile +redis-plugin start-graphdb`
 1. Start the game's key store: `lein with-profile +redis-plugin start-db`
 1. Ensure they are both running: `docker ps`
-1. Start the MUSH: `lein with-profile +redis-plugin repl` and then `(startup)`
+1. Start the MUSH:
+   * From the REPL: `lein with-profile +redis-plugin repl` and then `(startup)`
+   * From the CLI: `lein with-profile redis-plugin start-mush`
 
 
 ## Connecting [&#x219F;](#contents)
@@ -45,6 +47,12 @@ Telnet: `rlwrap telnet localhost 1130`
 
 Secure Telnet: `rlwrap ncat --telnet --ssl -n 127.0.0.1 1122`
 
+If you are on Mac OS X and have installed netcat via Homebrew, the `--ssl`
+option won't be available to you; instead, you should use the following:
+
+```
+openssl s_client -connect 127.0.0.1:1122
+```
 
 ## Usage [&#x219F;](#contents)
 
